@@ -58,6 +58,7 @@ namespace QuanLyTTB
           {
                Disable();
                ResetValue();
+               string a;
           }
 
           private void btnHuy_Click(object sender, EventArgs e)
