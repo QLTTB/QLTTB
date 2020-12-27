@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace QuanLyTTB
 {
@@ -16,6 +18,7 @@ namespace QuanLyTTB
           private DataTable table1;
           private Connection connector = new Connection();
           private int check;
+          string a;
           public frmDanhMucVTTTB()
           {
                InitializeComponent();
@@ -46,6 +49,7 @@ namespace QuanLyTTB
                ResetValue();
                Enable();
                tbMaTTB.Enabled = true;
+               tbNgayXuat.Enabled = true;
           }
           public void ResetValue()
           {
@@ -67,6 +71,7 @@ namespace QuanLyTTB
                btnXoa.Enabled =  false;
                btnLuu.Enabled = true;
                btnHuy.Enabled = true;
+               tbNgayXuat.Enabled = false;
                check = 0;
           }
 
@@ -81,6 +86,7 @@ namespace QuanLyTTB
                     btnLuu.Enabled = true;
                     btnHuy.Enabled = true;
                     check = 1;
+                    a = tbTT.Text; 
                }
                else
                {
@@ -90,7 +96,7 @@ namespace QuanLyTTB
 
           private void btnLuu_Click(object sender, EventArgs e)
           {
-               if (tbMaTTB.Text == "" || tbTenTTB.Text == "" || tbLoai.Text == "" || tbTrangThai.Text == "" || tbNgayNhap.Text == "")
+               if ( tbTenTTB.Text == "" || tbLoai.Text == "" || tbTrangThai.Text == "" || tbNgayNhap.Text == "" ||tbTT.Text =="")
                {
                     MessageBox.Show("Bạn cần nhập đầy đủ thông tin", "Thông Báo");
                }
@@ -99,21 +105,56 @@ namespace QuanLyTTB
                     if (tbNgayXuat.Text == "") tbNgayXuat.Text = null;
                     if (check == 0)
                     {
+                         string a;
                          connector.InsertUpdateObject("AddObject", "14", "", "", tbNgayNhap.Text, tbNgayXuat.Text, "", tbTenTTB.Text, tbLoai.Text, tbTrangThai.Text, "", "", "", "");
-                         MessageBox.Show("Thêm Thành Công", "Thông Báo");
+                         string sql = "Select * from VTTTB  where NgayNhap = '" + Convert.ToDateTime(tbNgayNhap.Text) + "' and Ten_VTTTB ='"+tbTenTTB.Text +"'and Loai='" +tbLoai.Text+"'";
+                         SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Conn"].ToString());
+                         connection.Open();
+                         SqlCommand command = new SqlCommand(sql, connection);
+                         command.CommandType = CommandType.Text;
+                         SqlDataReader dataReader = command.ExecuteReader();
+                         if (dataReader.Read() == true)
+                         {
+                              a = dataReader["Ma_VTTTB"].ToString();
+                              command.Dispose();
+                              connector.InsertUpdateObject("AddObject", "10", a, "", tbNgayNhap.Text, "", "", tbTT.Text, "", "", "", "", "", "1");
+                              MessageBox.Show("Thêm Thành Công", "Thông Báo");
+                         }
+                         command.Dispose();
                          reset();
                          ResetValue();
                          Enable();
                          tbMaTTB.Enabled = true;
+                         tbNgayXuat.Enabled = true;
                     }
                     if (check == 1)
                     {
-                         connector.InsertUpdateObject("EditObject", "14", "", "", tbNgayNhap.Text, tbNgayXuat.Text, "", tbTenTTB.Text, tbLoai.Text, tbTrangThai.Text, "", "", "", tbMaTTB.Text);
-                         MessageBox.Show("Sửa Thành Công", "Thông Báo");
-                         reset();
-                         ResetValue();
-                         Enable();
-                         tbMaTTB.Enabled = true;
+                         if (a == tbTT.Text)
+                         {
+                              connector.InsertUpdateObject("EditObject", "14", "", "", tbNgayNhap.Text, tbNgayXuat.Text, "", tbTenTTB.Text, tbLoai.Text, tbTrangThai.Text, "", "", "", tbMaTTB.Text);
+                              MessageBox.Show("Sửa Thành Công", "Thông Báo");
+                              reset();
+                              ResetValue();
+                              Enable();
+                              tbMaTTB.Enabled = true;
+                         }
+                         else
+                         {
+                              connector.InsertUpdateObject("EditObject", "14", "", "", tbNgayNhap.Text, tbNgayXuat.Text, "", tbTenTTB.Text, tbLoai.Text, tbTrangThai.Text, "", "", "", tbMaTTB.Text);
+                              string sql = "Update LICHSUTINHTRANG SET TG_KT ='" + DateTime.Now+"',KT = 0 where Ma_VTTTB = '" + tbMaTTB.Text.Trim() + "' and KT ='1'";
+                              SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Conn"].ToString());
+                              connection.Open();
+                              SqlCommand command = new SqlCommand(sql, connection);
+                              command.CommandType = CommandType.Text;
+                              command.ExecuteNonQuery();
+                              connection.Close();
+                              connector.InsertUpdateObject("AddObject", "10", tbMaTTB.Text, "", DateTime.Now.ToString(), "", "", tbTT.Text, "", "", "", "", "", "1");
+                              MessageBox.Show("Sửa Thành Công", "Thông Báo");
+                              reset();
+                              ResetValue();
+                              Enable();
+                              tbMaTTB.Enabled = true;
+                         }
                     }
                }
 
@@ -151,12 +192,24 @@ namespace QuanLyTTB
                table1 = new DataTable();
                table1 = connector.LoadData("OutPutTable", "10", a);
                dataGridView2.DataSource = table1;
+               
                tbMaTTB.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
                tbTenTTB.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
                tbLoai.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
                tbNgayNhap.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
                tbNgayXuat.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
                tbTrangThai.Text = dataGridView1.CurrentRow.Cells[5].Value.ToString();
+               string sql = "Select * from LICHSUTINHTRANG where Ma_VTTTB = '" + tbMaTTB.Text.Trim() + "' and KT = 1 ";
+               SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Conn"].ToString());
+               connection.Open();
+               SqlCommand command = new SqlCommand(sql, connection);
+               command.CommandType = CommandType.Text;
+               SqlDataReader dataReader = command.ExecuteReader();
+               if (dataReader.Read() == true)
+               {
+                    tbTT.Text = dataReader["TinhTrang"].ToString();
+               }
+               command.Dispose();
           }
      }
 }
