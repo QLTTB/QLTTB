@@ -92,21 +92,28 @@ namespace QuanLyTTB
 
           private void btnLuu_Click(object sender, EventArgs e)
           {
-               if(check == 0)
-               {                
-                    connector.InsertUpdateObject("AddObject", "8", cbMaCB.Text, "", "1/1/1990", "1/1/1900", "", tbLoaiCN.Text, tbND.Text, "", "", "", "", "");
-                    MessageBox.Show("Thêm Thành Công", "Thông Báo");
-                    reset();
-                    Enable();
-                    ResetValue();
-               }
-               if (check == 1)
+               if ( tbLoaiCN.Text == "" || tbND.Text == "" || cbMaCB.Text == "" || cbTenCB.Text == "")
                {
-                    connector.InsertUpdateObject("EditObject", "8", cbMaCB.Text, "", "1/1/1990", "1/1/1900", "", tbLoaiCN.Text, tbND.Text, "", "", "", "", tbMaLSCN.Text);
-                    MessageBox.Show("Sửa Thành Công", "Thông Báo");
-                    reset();
-                    Enable();
-                    ResetValue();
+                    MessageBox.Show("Bạn cần nhập đầy đủ thông tin", "Thông Báo");
+               }
+               else
+               {
+                    if (check == 0)
+                    {
+                         connector.InsertUpdateObject("AddObject", "8", cbMaCB.Text, "", "1/1/1990", "1/1/1900", "", tbLoaiCN.Text, tbND.Text, "", "", "", "", "");
+                         MessageBox.Show("Thêm Thành Công", "Thông Báo");
+                         reset();
+                         Enable();
+                         ResetValue();
+                    }
+                    if (check == 1)
+                    {
+                         connector.InsertUpdateObject("EditObject", "8", cbMaCB.Text, "", "1/1/1990", "1/1/1900", "", tbLoaiCN.Text, tbND.Text, "", "", "", "", tbMaLSCN.Text);
+                         MessageBox.Show("Sửa Thành Công", "Thông Báo");
+                         reset();
+                         Enable();
+                         ResetValue();
+                    }
                }
           }
 

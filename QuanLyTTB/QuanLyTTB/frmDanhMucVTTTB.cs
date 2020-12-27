@@ -45,6 +45,7 @@ namespace QuanLyTTB
           {
                ResetValue();
                Enable();
+               tbMaTTB.Enabled = true;
           }
           public void ResetValue()
           {
@@ -89,23 +90,31 @@ namespace QuanLyTTB
 
           private void btnLuu_Click(object sender, EventArgs e)
           {
-
-               if (tbNgayXuat.Text == "") tbNgayXuat.Text = null;
-               if(check == 0)
+               if (tbMaTTB.Text == "" || tbTenTTB.Text == "" || tbLoai.Text == "" || tbTrangThai.Text == "" || tbNgayNhap.Text == "")
                {
-                    connector.InsertUpdateObject("AddObject","14","","",tbNgayNhap.Text,tbNgayXuat.Text, "",tbTenTTB.Text,tbLoai.Text,tbTrangThai.Text,"","","","");
-                    MessageBox.Show("Thêm Thành Công", "Thông Báo");
-                    reset();
-                    ResetValue();
-                    Enable();
-               }             
-               if (check == 1)
+                    MessageBox.Show("Bạn cần nhập đầy đủ thông tin", "Thông Báo");
+               }
+               else
                {
-                    connector.InsertUpdateObject("EditObject", "14", "", "", tbNgayNhap.Text, tbNgayXuat.Text, "", tbTenTTB.Text, tbLoai.Text, tbTrangThai.Text, "", "","", tbMaTTB.Text);
-                    MessageBox.Show("Sửa Thành Công", "Thông Báo");
-                    reset();
-                    ResetValue();
-                    Enable();
+                    if (tbNgayXuat.Text == "") tbNgayXuat.Text = null;
+                    if (check == 0)
+                    {
+                         connector.InsertUpdateObject("AddObject", "14", "", "", tbNgayNhap.Text, tbNgayXuat.Text, "", tbTenTTB.Text, tbLoai.Text, tbTrangThai.Text, "", "", "", "");
+                         MessageBox.Show("Thêm Thành Công", "Thông Báo");
+                         reset();
+                         ResetValue();
+                         Enable();
+                         tbMaTTB.Enabled = true;
+                    }
+                    if (check == 1)
+                    {
+                         connector.InsertUpdateObject("EditObject", "14", "", "", tbNgayNhap.Text, tbNgayXuat.Text, "", tbTenTTB.Text, tbLoai.Text, tbTrangThai.Text, "", "", "", tbMaTTB.Text);
+                         MessageBox.Show("Sửa Thành Công", "Thông Báo");
+                         reset();
+                         ResetValue();
+                         Enable();
+                         tbMaTTB.Enabled = true;
+                    }
                }
 
           }

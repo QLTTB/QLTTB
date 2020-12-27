@@ -110,19 +110,27 @@ namespace QuanLyTTB
 
           public bool DeleteObject(string core, string pr1, string pr2)
           {
-               bool check = false;
-               if (TryConnect())
+               try
                {
-                    com = new SqlCommand("DeleteObject", con);
-                    com.CommandType = CommandType.StoredProcedure;
-                    com.Parameters.AddWithValue("@core", core);
-                    com.Parameters.AddWithValue("@pr1", pr1);
-                    com.Parameters.AddWithValue("@pr2", pr2);
-                    com.ExecuteNonQuery();
-                    check = true;
+                    bool check = false;
+                    if (TryConnect())
+                    {
+                         com = new SqlCommand("DeleteObject", con);
+                         com.CommandType = CommandType.StoredProcedure;
+                         com.Parameters.AddWithValue("@core", core);
+                         com.Parameters.AddWithValue("@pr1", pr1);
+                         com.Parameters.AddWithValue("@pr2", pr2);
+                         com.ExecuteNonQuery();
+                         check = true;
+                    }
+                    CloseConnect();
+                    return check;
                }
-               CloseConnect();
-               return check;
+               catch (Exception ex)
+               {
+                    MessageBox.Show(ex.ToString(), "ERROR");
+                    return false;
+               }
           }
 
           public DataTable FindObject(string core, string pr1)
