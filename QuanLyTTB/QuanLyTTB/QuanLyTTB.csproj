@@ -72,6 +72,12 @@
     <Compile Include="frmLichSuCapNhat.Designer.cs">
       <DependentUpon>frmLichSuCapNhat.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmQuanLyMuonTra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuanLyMuonTra.Designer.cs">
+      <DependentUpon>frmQuanLyMuonTra.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmThongTinCapNhat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLichSuCapNhat.resx">
       <DependentUpon>frmLichSuCapNhat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQuanLyMuonTra.resx">
+      <DependentUpon>frmQuanLyMuonTra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmThongTinCapNhat.resx">
       <DependentUpon>frmThongTinCapNhat.cs</DependentUpon>
