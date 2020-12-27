@@ -19,7 +19,8 @@ namespace QuanLyTTB
 
         private void frmQuanLyMuonTra_Load(object sender, EventArgs e)
         {
-               string a;
+            string a;
+            string ok;
         }
     }
 }
