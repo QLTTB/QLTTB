@@ -1,0 +1,11 @@
+C:\Users\PC\source\repos\QuanLyVT-TTB\QuanLyTTB\QuanLyTTB\obj\Release\QuanLyTTB.DanhMucTrangThietBi_UserControl.resources
+C:\Users\PC\source\repos\QuanLyVT-TTB\QuanLyTTB\QuanLyTTB\obj\Release\QuanLyTTB.Form1.resources
+C:\Users\PC\source\repos\QuanLyVT-TTB\QuanLyTTB\QuanLyTTB\obj\Release\QuanLyTTB.frmDanhMucVTTTB.resources
+C:\Users\PC\source\repos\QuanLyVT-TTB\QuanLyTTB\QuanLyTTB\obj\Release\QuanLyTTB.Properties.Resources.resources
+C:\Users\PC\source\repos\QuanLyVT-TTB\QuanLyTTB\QuanLyTTB\obj\Release\QuanLyTTB.csproj.GenerateResource.cache
+C:\Users\PC\source\repos\QuanLyVT-TTB\QuanLyTTB\QuanLyTTB\bin\Release\QuanLyTTB.exe.config
+C:\Users\PC\source\repos\QuanLyVT-TTB\QuanLyTTB\QuanLyTTB\bin\Release\QuanLyTTB.exe
+C:\Users\PC\source\repos\QuanLyVT-TTB\QuanLyTTB\QuanLyTTB\bin\Release\QuanLyTTB.pdb
+C:\Users\PC\source\repos\QuanLyVT-TTB\QuanLyTTB\QuanLyTTB\obj\Release\QuanLyTTB.exe
+C:\Users\PC\source\repos\QuanLyVT-TTB\QuanLyTTB\QuanLyTTB\obj\Release\QuanLyTTB.pdb
+C:\Users\PC\source\repos\QuanLyVT-TTB\QuanLyTTB\QuanLyTTB\obj\Release\QuanLyTTB.csprojAssemblyReference.cache
