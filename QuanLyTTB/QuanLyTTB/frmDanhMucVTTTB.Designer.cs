@@ -55,6 +55,7 @@
                this.label10 = new System.Windows.Forms.Label();
                this.label11 = new System.Windows.Forms.Label();
                this.tbTrangThai = new System.Windows.Forms.TextBox();
+               this.button1 = new System.Windows.Forms.Button();
                ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
                ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
                this.panel9.SuspendLayout();
@@ -149,6 +150,7 @@
                // panel9
                // 
                this.panel9.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+               this.panel9.Controls.Add(this.button1);
                this.panel9.Controls.Add(this.btnHuy);
                this.panel9.Controls.Add(this.label2);
                this.panel9.Controls.Add(this.btnSua);
@@ -336,6 +338,17 @@
                this.tbTrangThai.Size = new System.Drawing.Size(159, 35);
                this.tbTrangThai.TabIndex = 49;
                // 
+               // button1
+               // 
+               this.button1.Location = new System.Drawing.Point(577, 9);
+               this.button1.Margin = new System.Windows.Forms.Padding(2);
+               this.button1.Name = "button1";
+               this.button1.Size = new System.Drawing.Size(75, 46);
+               this.button1.TabIndex = 9;
+               this.button1.Text = "In";
+               this.button1.UseVisualStyleBackColor = true;
+               this.button1.Click += new System.EventHandler(this.button1_Click);
+               // 
                // frmDanhMucVTTTB
                // 
                this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -402,5 +415,6 @@
           private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox tbTrangThai;
+        private System.Windows.Forms.Button button1;
     }
 }

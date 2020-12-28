@@ -211,5 +211,11 @@ namespace QuanLyTTB
                }
                command.Dispose();
           }
+
+          private void button1_Click(object sender, EventArgs e)
+          {
+               frmThongKeVTTTB frmThongKe = new frmThongKeVTTTB();
+               frmThongKe.ShowDialog();
+          }
      }
 }
